@@ -19,23 +19,3 @@ sshkey_url: false
 # By default, enable a RAID 1 (a.k.a. mirroring)
 swraid: 1
 swraid_level: 1
-
-# Partition table definition
-partitions:
-  - mountpoint: /boot
-    filesystem: ext4
-    size: 2G
-  - mountpoint: lvm # Special value to use LVM
-    filesystem: vg-main # In this case, LVM volume group name
-    size: all # Will take all remaining space
-logical_volumes:
-  - vg: vg-main
-    name: swap
-    mountpoint: swap
-    filesystem: swap
-    size: "{{ ansible_memtotal_mb }}"
-  - vg: vg-main
-    name: root
-    mountpoint: /
-    filesystem: xfs
-    size: all

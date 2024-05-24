@@ -1,5 +1,4 @@
 IMAGE {{ image }}
-BOOTLOADER {{ bootloader }}
 HOSTNAME {{ hostname }}
 {% if sshkey_url %}
 # SSH keys to put on the installed system
@@ -20,7 +19,8 @@ SWRAIDLEVEL {{ swraid_level }}
   PART {{ part.mountpoint }} {{ part.filesystem }} {{ part.size }}
 {% endfor %}
 
-# Logical volumes
-{% for lv in logical_volumes -%}
-  LV {{ lv.vg }} {{ lv.name }} {{ lv.mountpoint }} {{ lv.filesystem }} {{ lv.size }}
-{% endfor %}
+USE_KERNEL_MODE_SETTING no
+PART /boot/efi esp 256M
+PART swap swap 32G
+PART /boot ext3 1024M
+PART / ext4 all
