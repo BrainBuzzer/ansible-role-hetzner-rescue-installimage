@@ -14,11 +14,6 @@ SSHKEYS_URL {{ sshkey_url }}
 SWRAID {{ swraid }}
 SWRAIDLEVEL {{ swraid_level }}
 
-# Physical partitions
-{% for part in partitions -%}
-  PART {{ part.mountpoint }} {{ part.filesystem }} {{ part.size }}
-{% endfor %}
-
 USE_KERNEL_MODE_SETTING no
 PART /boot/efi esp 256M
 PART swap swap 32G
